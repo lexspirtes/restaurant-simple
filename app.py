@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import and_
 import sys
 import json
 from flask_heroku import Heroku
@@ -69,12 +70,20 @@ def populate_db():
         add_rows(restaurant_data.data)
         print('added csv to db')
 
-
 populate_db()
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+@app.route('/', methods=['GET'])
+def return_results():
+    """
+    returns results to query: thai food with a health department rating
+    greater than a B
+    """
+    #run thing to check if db is populated?
+    #query that has been asked for
+    restaurant_info = Restaurant.query.filter(and_(Restaurant.cuisine.like('%Thai%'), \
+                        Restaurant.grade.in_(['A', 'B']))).all()
+    return render_template("results.html", restaurant_info=restaurant_info)
+
 
 if __name__ == '__main__':
     app.debug = True
