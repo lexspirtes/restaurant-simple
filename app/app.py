@@ -44,7 +44,7 @@ class Restaurant(db.Model):
     def stringify(self):
         """
         serializing Restaurant data to use JSONIFY later
-        
+
         Returns
         ----------
         an instance of Restaurant model as a dictionary
@@ -63,7 +63,7 @@ def add_rows(data_list):
     Parameters
     ----------
     data_list : list of dictionaries
-        output of ETL() class 
+        output of ETL() class
 
     Returns
     ----------
@@ -100,7 +100,7 @@ def add_rows(data_list):
 def populate_db():
     """
     checks if DB is populated
-    
+
     Returns
     ----------
     if populated --> nothing

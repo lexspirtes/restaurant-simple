@@ -15,7 +15,7 @@ class Etl:
     def data_dictionary(self):
         """
         opens and reads csv in self.url
-        
+
         Returns
         ----------
         the csv in self.url as a list of dictionaries (each row is a dict)
@@ -31,15 +31,15 @@ class Etl:
     def clean_data_iteration(self, data):
         """
         cleans each row of data for it to match model
-        
+
         Parameters
         ----------
         data : list of dictionaries
             uncleaned data provided by data_dictionary()
-        
+
         Returns
         ----------
-        cleaned list of dictionaries 
+        cleaned list of dictionaries
         """
         for i, row in enumerate(data):
             #cleaning keys to lowercase with underscore
@@ -50,7 +50,7 @@ class Etl:
             date_cols = ['inspection_date', 'record_date', 'grade_date']
             #string columns
             string_cols = set(data_clean.keys()) - set(int_cols) - set(date_cols)
-            #changing datatypes of columns where necessary 
+            #changing datatypes of columns where necessary
             for col in int_cols:
                 try:
                     data_clean[col] = int(data_clean[col])
