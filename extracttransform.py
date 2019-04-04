@@ -1,6 +1,5 @@
 import urllib2
 import csv
-import pandas as pd
 import datetime
 
 class Etl:
