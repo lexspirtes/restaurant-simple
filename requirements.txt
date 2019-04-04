@@ -4,6 +4,3 @@ django-heroku
 flask
 psycopg2
 Flask-SQLAlchemy
-urllib2
-csv
-datetime
