@@ -7,9 +7,9 @@ class Etl:
         #URL for the csv data
         self.url = 'https://data.cityofnewyork.us/api/views/43nn-pn8j/rows.csv?accessType=DOWNLOAD'
         self.uncleaned = self.data_dictionary()
-        print 'data loaded'
+        print('data loaded')
         self.data = self.clean_data_iteration(self.uncleaned)
-        print 'data cleaned'
+        print('data cleaned')
 
     #creates dictionary of CSV extracted from URL
     def data_dictionary(self):

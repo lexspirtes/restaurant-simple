@@ -71,8 +71,8 @@ def add_rows(data_list):
         db.session.add(current_row)
         db.session.commit()
         rows_added +=1
-    print 'percentage of rows added to db: ' + \
-            str(int(rows_added/data_length) * 100) + '%'
+    print('percentage of rows added to db: ' + \
+            str(int(rows_added/data_length) * 100) + '%')
 
 def populate_db():
     if Restaurant.query.first() == None:
