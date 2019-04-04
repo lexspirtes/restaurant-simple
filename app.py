@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import and_
 import sys
 import json
-from flask_heroku import Heroku
 from extracttransform import Etl
 
 app = Flask( __name__ )
