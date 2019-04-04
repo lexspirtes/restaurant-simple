@@ -13,12 +13,34 @@ class Etl:
 
     #creates dictionary of CSV extracted from URL
     def data_dictionary(self):
+        """
+        opens and reads csv in self.url
+        
+        Returns
+        ----------
+        the csv in self.url as a list of dictionaries (each row is a dict)
+        """
+        #opening URL
         response = urllib.urlopen(self.url)
+        #importing CSV as series of dictionaries
         my_csv = csv.DictReader(response)
+        #changes my_csv to a list of dictionaries
         rows = list(my_csv)
         return rows
 
     def clean_data_iteration(self, data):
+        """
+        cleans each row of data for it to match model
+        
+        Parameters
+        ----------
+        data : list of dictionaries
+            uncleaned data provided by data_dictionary()
+        
+        Returns
+        ----------
+        cleaned list of dictionaries 
+        """
         for i, row in enumerate(data):
             #cleaning keys to lowercase with underscore
             data_clean = {k.lower().replace(" ", "_"): v for k,v in row.items()}
@@ -28,7 +50,7 @@ class Etl:
             date_cols = ['inspection_date', 'record_date', 'grade_date']
             #string columns
             string_cols = set(data_clean.keys()) - set(int_cols) - set(date_cols)
-            #data_clean = {k:(int(v) if k in int_cols else v) for k,v in data.items()}
+            #changing datatypes of columns where necessary 
             for col in int_cols:
                 try:
                     data_clean[col] = int(data_clean[col])
