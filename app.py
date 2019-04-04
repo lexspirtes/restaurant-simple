@@ -8,8 +8,7 @@ from extracttransform import Etl
 
 app = Flask( __name__ )
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Lex@localhost:5432/restaurant'
-heroku = Heroku(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Lex@localhost:5432/restaurant'
 db = SQLAlchemy(app)
 
 class Restaurant(db.Model):

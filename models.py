@@ -1,4 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
+<<<<<<< HEAD
+=======
+from app import db
+>>>>>>> b62b673c033246e19f00743c994c9c5599b19eef
 
 class Restaurant(db.Model):
     """
