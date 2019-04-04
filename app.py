@@ -7,6 +7,7 @@ from extracttransform import Etl
 import os
 import psycopg2
 
+#configuration for db connection
 app = Flask( __name__ )
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 DATABASE_URL = os.environ['DATABASE_URL']
@@ -14,6 +15,7 @@ conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 db = SQLAlchemy(app)
 
+#model for each restaurant, where columns match the CSV provided in Etl.url
 class Restaurant(db.Model):
     """
     Table schema for data to input into database
@@ -47,8 +49,19 @@ class Restaurant(db.Model):
                         'record_date', 'inspection_type']
         return dict((c, getattr(self, c)) for c in column_list)
 
-#function that adds all rows to database
 def add_rows(data_list):
+    """
+    adds and commits each row to database
+
+    Parameters
+    ----------
+    data_list : list of dictionaries
+        output of ETL() class 
+
+    Returns
+    ----------
+    print statement of ratio of rows added to DB to len(data_list)
+    """
     data_length = len(data_list)
     rows_added = 0
     for row in data_list:
@@ -76,20 +89,31 @@ def add_rows(data_list):
     print('percentage of rows added to db: ' + \
             str(int(rows_added/data_length) * 100) + '%')
 
+
 def populate_db():
+    """
+    checks if DB is populated
+    
+    Returns
+    ----------
+    if populated --> nothing
+    else --> database populated with data generated in Etl()
+    """
     if Restaurant.query.first() == None:
         restaurant_data = Etl()
         add_rows(restaurant_data.data)
 
+#running populate_db() when app is started
 populate_db()
 
 @app.route('/', methods=['GET'])
 def return_results():
     """
-    returns results to query: thai food with a health department rating
+    Returns
+    ----------
+    template that displays results to query: thai food with a health department rating
     greater than a B
     """
-    #run thing to check if db is populated?
     #query that has been asked for
     restaurant_info = Restaurant.query.filter(and_(Restaurant.cuisine.like('%Thai%'), \
                         Restaurant.grade.in_(['A', 'B']))).all()
@@ -98,10 +122,11 @@ def return_results():
 @app.route('/curl', methods=['GET'])
 def json_me():
     """
-    returns results to query: thai food with a health department rating as a json object
+    Returns
+    ----------
+    JSON results of query: thai food with a health department rating
+    greater than a B (for CURL-ing)
     """
-    #run thing to check if db is populated?
-    #query that has been asked for
     restaurant_info = Restaurant.query.filter(and_(Restaurant.cuisine.like('%Thai%'), \
                         Restaurant.grade.in_(['A', 'B']))).all()
     return jsonify([r.stringify for r in restaurant_info])
