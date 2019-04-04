@@ -42,6 +42,13 @@ class Restaurant(db.Model):
 
     @property
     def stringify(self):
+        """
+        serializing Restaurant data to use JSONIFY later
+        
+        Returns
+        ----------
+        an instance of Restaurant model as a dictionary
+        """
         column_list = ['camis', 'name', 'borough', 'building',
                         'street', 'zipcode', 'phone', 'cuisine',
                         'inspection_date', 'action', 'violation_code',
