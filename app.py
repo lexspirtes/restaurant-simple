@@ -9,10 +9,10 @@ import psycopg2
 
 app = Flask( __name__ )
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Lex@localhost:5432/restaurant'
 DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-db = SQLAlchemy(DATABASE_URL)
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+db = SQLAlchemy(app)
 
 class Restaurant(db.Model):
     """
