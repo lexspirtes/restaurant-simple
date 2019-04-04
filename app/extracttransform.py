@@ -10,7 +10,7 @@ class Etl:
         print('data loaded')
         self.data = self.clean_data_iteration(self.uncleaned)
         print('data cleaned')
-
+        self.test_return = self.data[0]
     #creates dictionary of CSV extracted from URL
     def data_dictionary(self):
         """
