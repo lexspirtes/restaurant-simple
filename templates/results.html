@@ -1,0 +1,11 @@
+<head>
+<h1> Thank you for coming!!! </h1>
+</head>
+<body>
+<!--loops through thai query and returns results-->
+{% for restaurant in restaurant_info %}
+<!--prints restaurant name-->
+<h3> {{restaurant.name}} : {{restaurant.grade}}
+ </h3>
+{% endfor %}
+</body>
