@@ -1,0 +1,7 @@
+django
+gunicorn
+django-heroku
+from flask import Flask, render_template
+json
+psycopg2
+Flask-SQLAlchemy
