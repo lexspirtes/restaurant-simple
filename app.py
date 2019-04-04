@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import and_
 import sys
@@ -35,6 +35,15 @@ class Restaurant(db.Model):
     record_date = db.Column(db.Date)
     inspection_type = db.Column(db.String)
 
+    @property
+    def stringify(self):
+        column_list = ['camis', 'name', 'borough', 'building',
+                        'street', 'zipcode', 'phone', 'cuisine',
+                        'inspection_date', 'action', 'violation_code',
+                        'critical_flag', 'score', 'grade', 'grade_date',
+                        'record_date', 'inspection_type']
+        return dict((c, getattr(self, c)) for c in column_list)
+
 #function that adds all rows to database
 def add_rows(data_list):
     data_length = len(data_list)
@@ -68,7 +77,6 @@ def populate_db():
     if Restaurant.query.first() == None:
         restaurant_data = Etl()
         add_rows(restaurant_data.data)
-        print('added csv to db')
 
 populate_db()
 
@@ -84,6 +92,16 @@ def return_results():
                         Restaurant.grade.in_(['A', 'B']))).all()
     return render_template("results.html", restaurant_info=restaurant_info)
 
+@app.route('/curl', methods=['GET'])
+def json_me():
+    """
+    returns results to query: thai food with a health department rating as a json object
+    """
+    #run thing to check if db is populated?
+    #query that has been asked for
+    restaurant_info = Restaurant.query.filter(and_(Restaurant.cuisine.like('%Thai%'), \
+                        Restaurant.grade.in_(['A', 'B']))).all()
+    return jsonify(data =[r.stringify for r in restaurant_info])
 
 if __name__ == '__main__':
     app.debug = True
