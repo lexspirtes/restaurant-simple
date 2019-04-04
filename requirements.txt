@@ -2,7 +2,6 @@ django
 gunicorn
 django-heroku
 flask
-json
 psycopg2
 Flask-SQLAlchemy
 urllib2
