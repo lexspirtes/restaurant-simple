@@ -1,4 +1,4 @@
-import urllib2
+import urllib
 import csv
 import datetime
 
@@ -13,7 +13,7 @@ class Etl:
 
     #creates dictionary of CSV extracted from URL
     def data_dictionary(self):
-        response = urllib2.urlopen(self.url)
+        response = urllib.urlopen(self.url)
         my_csv = csv.DictReader(response)
         rows = list(my_csv)
         return rows
