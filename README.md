@@ -8,15 +8,14 @@ https://data.cityofnewyork.us/api/views/43nn-pn8j/rows.csv?accessType=DOWNLOAD
 
 ## CURL Request
 To curl results from the SQL Query, type in: 
-### curl https://pickly-thai-lover.herokuapp.com/curl
+- curl https://pickly-thai-lover.herokuapp.com/curl
 
 ## SQL Query
 Raw SQL:
-SELECT * FROM restaurant_info WHERE
-(cuisine LIKE %Thai%) AND (grade in ('A', 'B'))
+- '''SELECT * FROM restaurant_info WHERE (cuisine LIKE %Thai%) AND (grade in ('A', 'B'))'''
 
 SQL Alchemy Query Used in Code:
-Restaurant.query.filter(and_(Restaurant.cuisine.like('%Thai%'), \
+- Restaurant.query.filter(and_(Restaurant.cuisine.like('%Thai%'), \
                         Restaurant.grade.in_(['A', 'B']))).all()
 
 
