@@ -104,7 +104,7 @@ def json_me():
     #query that has been asked for
     restaurant_info = Restaurant.query.filter(and_(Restaurant.cuisine.like('%Thai%'), \
                         Restaurant.grade.in_(['A', 'B']))).all()
-    return jsonify(r.stringify for r in restaurant_info)
+    return jsonify([r.stringify for r in restaurant_info])
 
 if __name__ == '__main__':
     app.debug = True
