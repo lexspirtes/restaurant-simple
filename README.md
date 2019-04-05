@@ -59,15 +59,19 @@ SQL Alchemy Query Used in Code:
 - Overall Approach
   - I wanted to take the easiest to read and understand approach. I have developed in Flask before, but have not used Heroku, so I wanted to incorporate a framework that I felt comfortable in. I put everything in app.py because I only had one model and two simple views, so I thought it was small enough to put under one roof. I made populate_db() as only an if statement, so that it would only populate my database table if it was empty.
 - Extract Transform
-  - I use pandas everyday at work, but it requires a lot of overhead and I wanted to challenge myself to use a native data structure that is quickly mutable. I chose dictionaries specifically, because it mocks the structure of a model instance.
+  - I use pandas everyday at work, but it requires a lot of overhead and I wanted to challenge myself to use a native data structure that is quickly mutable. I chose dictionaries specifically, because it mocks the structure of a model instance, so it would be easy to translate.
   - I put it into a class because it was very self-contained into performing functions that did not interact with the database. I developed the extract and transform class and tested it manually a lot and once I got the output I wanted, I knew that it could interact with the add_rows function.
 - CURL and View
   - I am a visual person, so I wanted to visualize what the request could look like rather than looking at only the JSONify-ed return, also since Heroku gives you a URL, I wanted to use it in the most basic way!
+- Testing
+  - This was my first crack at unittesting and I am excited to learn more! I added it on last, because I have never written tests before, but now I completely understand what Clint was saying about test first development. I tested manually in a python shell as I went, but it would be very helpful to write tests to make sure that my functions were behaving exactly as I intended them to. I think had I written tests first or as I went, my code would be structured differently because each time I test my ETL class, I have to load in all the data, which takes a while! 
 
 ## Next Steps
 - write more tests!!!
-  - create tests that test adding to db
+  - write tests with mock db
+    - adding to db
   - create tests for SQL queries
+  - create tests for extraction
 - app schema 2.0
   - given more time, I would love to separate the app to have config.py, models.py, views.py etc rather than house it all in app.py
 - create a frontend that allows you to choose between options and generates queries
