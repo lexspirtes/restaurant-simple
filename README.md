@@ -64,7 +64,7 @@ SQL Alchemy Query Used in Code:
 - CURL and View
   - I am a visual person, so I wanted to visualize what the request could look like rather than looking at only the JSONify-ed return, also since Heroku gives you a URL, I wanted to use it in the most basic way!
 - Testing
-  - This was my first crack at unittesting and I am excited to learn more! I added it on last, because I have never written tests before, but now I completely understand what Clint was saying about test first development. I tested manually in a python shell as I went, but it would be very helpful to write tests to make sure that my functions were behaving exactly as I intended them to. I think had I written tests first or as I went, my code would be structured differently because each time I test my ETL class, I have to load in all the data, which takes a while! 
+  - This was my first crack at unittesting and I am excited to learn more! I added it on last, because I have never written tests before, but want to start incorporating tdd in the future. I tested manually in a python shell as I went, but it would be very helpful to write tests to make sure that my functions were behaving exactly as I intended them to. I think had I written tests first or as I went, my code would be structured differently because each time I test my ETL class, I have to load in all the data, which takes a while! 
 
 ## Next Steps
 - write more tests!!!
@@ -81,3 +81,5 @@ SQL Alchemy Query Used in Code:
   - some restaurants don't have complete data --> how are these handled?
     - don't include in DB
     - make it clear that restaurants without grades will not show up with queries?
+- API
+  - make API endpoint so it doesn't call database each time
