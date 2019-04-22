@@ -91,8 +91,8 @@ def add_rows(data_list):
         record_date=row['record_date'],
         inspection_type=row['inspection_type'])
         db.session.add(current_row)
-        db.session.commit()
         rows_added +=1
+    db.session.commit()  
     print('percentage of rows added to db: ' + \
             str(int(rows_added/data_length) * 100) + '%')
 
